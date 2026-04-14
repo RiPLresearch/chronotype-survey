@@ -327,7 +327,7 @@
       flex-shrink: 0;
     }
 
-    /* ── Page transitions ── */
+    /* ── Transitions ── */
     .view {
       animation: fadeUp 0.4s ease both;
     }
@@ -349,7 +349,7 @@
 <body>
   <div class="container">
 
-    <!-- ═══════════════════════════════ SURVEY VIEW ═══════════════════════════════ -->
+    <!-- ═══════════════════════ SURVEY VIEW ═══════════════════════ -->
     <div id="v-survey" class="view">
       <div class="header">
         <div class="icon">🌙 ☀️</div>
@@ -367,13 +367,10 @@
       </div>
 
       <form id="survey-form"></form>
-
-      <button class="btn-primary" id="submit-btn" disabled>
-        See My Chronotype →
-      </button>
+      <button class="btn-primary" id="submit-btn" disabled>See My Chronotype →</button>
     </div>
 
-    <!-- ═══════════════════════════════ RESULTS VIEW ══════════════════════════════ -->
+    <!-- ═══════════════════════ RESULTS VIEW ══════════════════════ -->
     <div id="v-results" class="view" style="display:none">
       <div class="results-header">
         <div class="badge" id="r-badge"></div>
@@ -411,7 +408,6 @@
     </div>
 
   </div>
-
   <script>
     // ════════════════════════════════════════════════════════════════════════════════
     //  FIREBASE CONFIG
@@ -427,80 +423,80 @@
     };
     // ════════════════════════════════════════════════════════════════════════════════
 
-    // ── rMEQ questions & scoring ──────────────────────────────────────────────────
-    // Reduced MEQ (Adan & Almirall, 1991). Scores range 5–22.
-    // Odd scoring on Q1/Q2 (5→1) reflects that early times = more morning-type.
+    // ── rMEQ questions — exact wording from Adan & Almirall (1991) ────────────────
+    // Scores range 4–25. Low = evening type, high = morning type.
     const QUESTIONS = [
       {
-        text: "If you were entirely free to plan your day, at what time would you choose to wake up?",
+        text: 'Considering only your own "feeling best" rhythm, at what time would you get up if you were entirely free to plan your day?',
         opts: [
           { label: "Before 6:30 AM", val: 5 },
-          { label: "6:30 – 7:30 AM", val: 4 },
-          { label: "7:30 – 9:30 AM", val: 3 },
-          { label: "9:30 – 11:00 AM", val: 2 },
+          { label: "6:30 AM – 7:45 AM", val: 4 },
+          { label: "7:45 AM – 9:45 AM", val: 3 },
+          { label: "9:45 AM – 11:00 AM", val: 2 },
           { label: "After 11:00 AM", val: 1 },
         ]
       },
       {
-        text: "If you were entirely free to plan your evening, at what time would you choose to go to bed?",
+        text: "During the first half hour after awakening in the morning, how tired do you feel?",
+        opts: [
+          { label: "Very tired", val: 1 },
+          { label: "Fairly tired", val: 2 },
+          { label: "Fairly refreshed", val: 3 },
+          { label: "Very refreshed", val: 4 },
+        ]
+      },
+      {
+        text: "At what time in the evening do you feel tired and in need of sleep?",
         opts: [
           { label: "Before 9:00 PM", val: 5 },
-          { label: "9:00 – 10:15 PM", val: 4 },
+          { label: "9:00 PM – 10:15 PM", val: 4 },
           { label: "10:15 PM – 12:30 AM", val: 3 },
-          { label: "12:30 – 2:00 AM", val: 2 },
-          { label: "After 2:00 AM", val: 1 },
+          { label: "12:30 AM – 1:45 AM", val: 2 },
+          { label: "After 1:45 AM", val: 1 },
         ]
       },
       {
-        text: "If you must wake at a specific time in the morning, how much do you depend on an alarm clock?",
+        text: 'At what time of the day do you think that you reach your "feeling best" peak?',
         opts: [
-          { label: "Not at all", val: 4 },
-          { label: "Slightly", val: 3 },
-          { label: "Somewhat", val: 2 },
-          { label: "Very much", val: 1 },
+          { label: "10:00 PM – 5:00 AM", val: 1 },
+          { label: "5:00 PM – 10:00 PM", val: 2 },
+          { label: "10:00 AM – 5:00 PM", val: 3 },
+          { label: "8:00 AM – 10:00 AM", val: 4 },
+          { label: "5:00 AM – 8:00 AM", val: 5 },
         ]
       },
       {
-        text: "How easy do you generally find it to wake up in the morning?",
+        text: 'One hears about "morning" and "evening" types of people. Which one of these types do you consider yourself to be?',
         opts: [
-          { label: "Not at all easy", val: 1 },
-          { label: "Not very easy", val: 2 },
-          { label: "Fairly easy", val: 3 },
-          { label: "Very easy", val: 4 },
-        ]
-      },
-      {
-        text: "How alert do you feel during the first half hour after waking up?",
-        opts: [
-          { label: "Not at all alert", val: 1 },
-          { label: "Slightly alert", val: 2 },
-          { label: "Fairly alert", val: 3 },
-          { label: "Very alert", val: 4 },
+          { label: 'Definitely a "morning" type', val: 6 },
+          { label: 'Rather more a "morning" than "evening" type', val: 4 },
+          { label: 'Rather more an "evening" than "morning" type', val: 2 },
+          { label: 'Definitely an "evening" type', val: 0 },
         ]
       }
     ];
 
-    // Score → chronotype lookup (min inclusive, max inclusive, scores 5–22)
+    // Chronotype classification — Adan & Almirall (1991), scores 4–25
     const TYPES = [
       {
-        min: 22, max: 22, label: "Definitely Morning", color: "#f97316",
-        desc: "You're a true early bird. You naturally wake early, feel energised in the morning, and wind down well before midnight."
+        min: 22, max: 25, label: "Definitely Morning", color: "#f97316",
+        desc: 'You\'re a true early bird. You naturally wake early, feel energised in the morning, and wind down well before midnight.'
       },
       {
         min: 18, max: 21, label: "Moderately Morning", color: "#fbbf24",
-        desc: "You lean morning. Early starts suit you well and you're at your sharpest before the afternoon rolls around."
+        desc: 'You lean morning. Early starts suit you well and you\'re at your sharpest before the afternoon rolls around.'
       },
       {
         min: 12, max: 17, label: "Intermediate", color: "#6366f1",
-        desc: "You're comfortably in the middle — neither strongly morning nor evening. You adapt fairly well to different schedules."
+        desc: 'You\'re comfortably in the middle — neither strongly morning nor evening. You adapt fairly well to different schedules.'
       },
       {
         min: 8, max: 11, label: "Moderately Evening", color: "#8b5cf6",
-        desc: "You lean evening. You hit your stride later in the day and feel most alert in the afternoon or evening."
+        desc: 'You lean evening. You hit your stride later in the day and feel most alert in the afternoon or evening.'
       },
       {
-        min: 5, max: 7, label: "Definitely Evening", color: "#312e81",
-        desc: "You're a true night owl. You come alive in the evening, find early mornings difficult, and prefer late nights."
+        min: 4, max: 7, label: "Definitely Evening", color: "#312e81",
+        desc: 'You\'re a true night owl. You come alive in the evening, find early mornings difficult, and prefer late nights.'
       },
     ];
 
@@ -509,22 +505,16 @@
     }
 
     // ── Firebase init ─────────────────────────────────────────────────────────────
-    let db = null;
-    let fbReady = false;
-
+    let db = null, fbReady = false;
     try {
       if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
         firebase.initializeApp(firebaseConfig);
         db = firebase.database();
         fbReady = true;
       }
-    } catch (e) {
-      console.warn("Firebase init failed:", e);
-    }
+    } catch (e) { console.warn("Firebase init failed:", e); }
 
-    if (!fbReady) {
-      document.getElementById("config-warn").style.display = "block";
-    }
+    if (!fbReady) document.getElementById("config-warn").style.display = "block";
 
     // ── Render questions ──────────────────────────────────────────────────────────
     const form = document.getElementById("survey-form");
@@ -561,19 +551,15 @@
     });
 
     // ── Submit ────────────────────────────────────────────────────────────────────
-    let userScore = null;
-    let chart = null;
-    let fbListener = null;
+    let userScore = null, chart = null, fbListener = null;
 
     document.getElementById("submit-btn").addEventListener("click", async () => {
       const score = Object.values(answers).reduce((a, b) => a + b, 0);
       userScore = score;
-
       if (fbReady) {
         try { await db.ref("responses").push({ score, ts: Date.now() }); }
         catch (e) { console.warn("Save failed:", e); }
       }
-
       showResults(score);
     });
 
@@ -581,7 +567,6 @@
     function showResults(score) {
       const type = getType(score);
 
-      // Populate header
       const badge = document.getElementById("r-badge");
       badge.textContent = type.label;
       badge.style.background = type.color + "28";
@@ -592,24 +577,19 @@
       document.getElementById("r-name").textContent = type.label;
       document.getElementById("r-desc").textContent = type.desc;
 
-      // Show results view
       document.getElementById("v-survey").style.display = "none";
       const rv = document.getElementById("v-results");
       rv.style.display = "block";
       rv.classList.remove("view"); void rv.offsetWidth; rv.classList.add("view");
 
-      // Build chart
       buildChart();
     }
 
-    // Score range: 5–22 (18 integer values)
-    const SCORE_LABELS = Array.from({ length: 18 }, (_, i) => i + 5);
+    // ── Chart (scores 4–25 = 22 bars) ────────────────────────────────────────────
+    const SCORE_LABELS = Array.from({ length: 22 }, (_, i) => i + 4);
 
-    function barColors(highlight) {
-      return SCORE_LABELS.map(s => {
-        if (s === highlight) return "#ffffff";
-        return getType(s).color + "bb";
-      });
+    function barColors() {
+      return SCORE_LABELS.map(s => s === userScore ? "#ffffff" : getType(s).color + "bb");
     }
 
     function buildChart() {
@@ -621,10 +601,9 @@
         data: {
           labels: SCORE_LABELS,
           datasets: [{
-            data: new Array(18).fill(0),
-            backgroundColor: barColors(userScore),
-            borderColor: barColors(userScore).map((c, i) =>
-              SCORE_LABELS[i] === userScore ? "#ffffff" : getType(SCORE_LABELS[i]).color),
+            data: new Array(22).fill(0),
+            backgroundColor: barColors(),
+            borderColor: SCORE_LABELS.map(s => s === userScore ? "#ffffff" : getType(s).color),
             borderWidth: SCORE_LABELS.map(s => s === userScore ? 2 : 1),
             borderRadius: 4,
           }]
@@ -644,17 +623,15 @@
                   return `${n} response${n !== 1 ? "s" : ""}  ·  ${getType(s).label}${you}`;
                 }
               },
-              backgroundColor: "#1e293b",
-              borderColor: "#334155", borderWidth: 1,
-              titleColor: "#f1f5f9", bodyColor: "#94a3b8",
-              padding: 10,
+              backgroundColor: "#1e293b", borderColor: "#334155", borderWidth: 1,
+              titleColor: "#f1f5f9", bodyColor: "#94a3b8", padding: 10,
             }
           },
           scales: {
             x: {
               title: {
                 display: true,
-                text: "rMEQ Score    (5 = Evening type  ←————→  22 = Morning type)",
+                text: "rMEQ Score    (4 = Evening type  ←————→  25 = Morning type)",
                 color: "#475569", font: { size: 10.5 }
               },
               ticks: { color: "#64748b", font: { size: 11 } },
@@ -671,26 +648,23 @@
         }
       });
 
-      // Live data from Firebase (or fallback to single score)
       if (fbReady) {
         fbListener = db.ref("responses").on("value", snap => {
           const data = snap.val() || {};
-          const counts = new Array(18).fill(0);
+          const counts = new Array(22).fill(0);
           let total = 0;
-
           Object.values(data).forEach(r => {
-            const idx = r.score - 5;
-            if (idx >= 0 && idx < 18) { counts[idx]++; total++; }
+            const idx = r.score - 4;
+            if (idx >= 0 && idx < 22) { counts[idx]++; total++; }
           });
-
           chart.data.datasets[0].data = counts;
           chart.update("none");
           document.getElementById("resp-count").innerHTML =
             `<strong>${total}</strong> total response${total !== 1 ? "s" : ""} so far`;
         });
       } else {
-        const counts = new Array(18).fill(0);
-        counts[userScore - 5] = 1;
+        const counts = new Array(22).fill(0);
+        counts[userScore - 4] = 1;
         chart.data.datasets[0].data = counts;
         chart.update();
         document.getElementById("resp-count").innerHTML =
@@ -700,20 +674,14 @@
 
     // ── Reset ─────────────────────────────────────────────────────────────────────
     function resetSurvey() {
-      if (fbReady && fbListener) {
-        db.ref("responses").off("value", fbListener);
-        fbListener = null;
-      }
+      if (fbReady && fbListener) { db.ref("responses").off("value", fbListener); fbListener = null; }
       if (chart) { chart.destroy(); chart = null; }
-
       Object.keys(answers).forEach(k => delete answers[k]);
       document.querySelectorAll(".opt").forEach(el => el.classList.remove("sel"));
       document.querySelectorAll("input[type=radio]").forEach(el => el.checked = false);
       userScore = null;
-
       document.getElementById("progress-fill").style.width = "0%";
       document.getElementById("submit-btn").disabled = true;
-
       document.getElementById("v-results").style.display = "none";
       const sv = document.getElementById("v-survey");
       sv.style.display = "block";
