@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,19 +14,26 @@
 
   <style>
     :root {
-      --morning:     #f97316;
+      --morning: #f97316;
       --mod-morning: #fbbf24;
-      --middle:      #6366f1;
+      --middle: #6366f1;
       --mod-evening: #8b5cf6;
-      --evening:     #312e81;
-      --bg:          #0f172a;
-      --card:        #1e293b;
-      --border:      #334155;
-      --text:        #f1f5f9;
-      --muted:       #94a3b8;
-      --accent:      #6366f1;
+      --evening: #312e81;
+      --bg: #0f172a;
+      --card: #1e293b;
+      --border: #334155;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #6366f1;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -38,16 +46,33 @@
       padding: 2.5rem 1.25rem 4rem;
     }
 
-    .container { width: 100%; max-width: 660px; }
+    .container {
+      width: 100%;
+      max-width: 660px;
+    }
 
     /* ── Header ── */
     .header {
       text-align: center;
       margin-bottom: 2rem;
     }
-    .header .icon { font-size: 2.4rem; margin-bottom: 0.5rem; line-height: 1; }
-    .header h1 { font-size: 1.7rem; font-weight: 700; margin-bottom: 0.3rem; }
-    .header p  { color: var(--muted); font-size: 0.92rem; }
+
+    .header .icon {
+      font-size: 2.4rem;
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+
+    .header h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .header p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
 
     /* ── Progress ── */
     .progress-track {
@@ -57,6 +82,7 @@
       margin-bottom: 2rem;
       overflow: hidden;
     }
+
     .progress-fill {
       height: 100%;
       background: var(--accent);
@@ -72,6 +98,7 @@
       padding: 1.5rem;
       margin-bottom: 1rem;
     }
+
     .q-num {
       font-size: 0.72rem;
       font-weight: 700;
@@ -80,13 +107,19 @@
       color: var(--accent);
       margin-bottom: 0.45rem;
     }
+
     .q-text {
       font-size: 0.97rem;
       font-weight: 500;
       line-height: 1.55;
       margin-bottom: 1rem;
     }
-    .options { display: flex; flex-direction: column; gap: 0.45rem; }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
 
     .opt {
       display: flex;
@@ -99,26 +132,53 @@
       transition: border-color 0.15s, background 0.15s;
       user-select: none;
     }
-    .opt:hover { border-color: var(--accent); background: rgba(99,102,241,0.07); }
-    .opt input { display: none; }
+
+    .opt:hover {
+      border-color: var(--accent);
+      background: rgba(99, 102, 241, 0.07);
+    }
+
+    .opt input {
+      display: none;
+    }
+
     .dot {
-      width: 17px; height: 17px;
+      width: 17px;
+      height: 17px;
       border-radius: 50%;
       border: 2px solid var(--border);
       flex-shrink: 0;
       transition: border-color 0.15s, background 0.15s;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .opt.sel { border-color: var(--accent); background: rgba(99,102,241,0.1); }
-    .opt.sel .dot { border-color: var(--accent); background: var(--accent); }
+
+    .opt.sel {
+      border-color: var(--accent);
+      background: rgba(99, 102, 241, 0.1);
+    }
+
+    .opt.sel .dot {
+      border-color: var(--accent);
+      background: var(--accent);
+    }
+
     .opt.sel .dot::after {
-      content: ''; width: 5px; height: 5px;
-      border-radius: 50%; background: #fff;
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #fff;
     }
-    .opt-label { font-size: 0.88rem; }
+
+    .opt-label {
+      font-size: 0.88rem;
+    }
 
     /* ── Buttons ── */
-    .btn-primary, .btn-outline {
+    .btn-primary,
+    .btn-outline {
       width: 100%;
       padding: 0.95rem;
       border-radius: 11px;
@@ -129,21 +189,38 @@
       border: none;
       margin-top: 0.5rem;
     }
-    .btn-primary { background: var(--accent); color: #fff; }
-    .btn-primary:hover:not(:disabled) { background: #4f46e5; transform: translateY(-1px); }
-    .btn-primary:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #4f46e5;
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      transform: none;
+    }
 
     .btn-outline {
       background: transparent;
       color: var(--accent);
       border: 2px solid var(--accent);
     }
-    .btn-outline:hover { background: rgba(99,102,241,0.1); transform: translateY(-1px); }
+
+    .btn-outline:hover {
+      background: rgba(99, 102, 241, 0.1);
+      transform: translateY(-1px);
+    }
 
     /* ── Config warning ── */
     .config-warn {
-      background: rgba(239,68,68,0.1);
-      border: 1px solid rgba(239,68,68,0.3);
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
       border-radius: 9px;
       padding: 0.85rem 1rem;
       font-size: 0.82rem;
@@ -154,7 +231,11 @@
     }
 
     /* ── Results ── */
-    .results-header { text-align: center; margin-bottom: 1.5rem; }
+    .results-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
     .badge {
       display: inline-block;
       padding: 0.3rem 0.9rem;
@@ -165,9 +246,27 @@
       letter-spacing: 0.06em;
       margin-bottom: 0.75rem;
     }
-    .big-score { font-size: 4rem; font-weight: 800; line-height: 1; margin-bottom: 0.3rem; }
-    .type-name { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .type-desc { color: var(--muted); font-size: 0.92rem; line-height: 1.65; max-width: 460px; margin: 0 auto; }
+
+    .big-score {
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .type-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .type-desc {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.65;
+      max-width: 460px;
+      margin: 0 auto;
+    }
 
     .results-card {
       background: var(--card);
@@ -176,13 +275,34 @@
       padding: 1.5rem;
       margin-bottom: 1rem;
     }
-    .results-card h3 { font-size: 0.97rem; font-weight: 600; margin-bottom: 0.2rem; }
-    .results-card .sub { color: var(--muted); font-size: 0.82rem; margin-bottom: 1.1rem; }
 
-    .resp-count { text-align: center; color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem; }
-    .resp-count strong { color: var(--text); }
+    .results-card h3 {
+      font-size: 0.97rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
 
-    .chart-wrap { position: relative; height: 210px; }
+    .results-card .sub {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .resp-count {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    .resp-count strong {
+      color: var(--text);
+    }
+
+    .chart-wrap {
+      position: relative;
+      height: 210px;
+    }
 
     .legend {
       display: flex;
@@ -191,200 +311,230 @@
       margin-top: 1rem;
       justify-content: center;
     }
-    .leg-item { display: flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; color: var(--muted); }
-    .leg-swatch { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+    .leg-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .leg-swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
 
     /* ── Page transitions ── */
-    .view { animation: fadeUp 0.4s ease both; }
+    .view {
+      animation: fadeUp 0.4s ease both;
+    }
+
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
+
 <body>
-<div class="container">
+  <div class="container">
 
-  <!-- ═══════════════════════════════ SURVEY VIEW ═══════════════════════════════ -->
-  <div id="v-survey" class="view">
-    <div class="header">
-      <div class="icon">🌙 ☀️</div>
-      <h1>Sleep Chronotype Survey</h1>
-      <p>5 questions &nbsp;·&nbsp; ~2 minutes</p>
-    </div>
-
-    <div class="progress-track">
-      <div class="progress-fill" id="progress-fill" style="width:0%"></div>
-    </div>
-
-    <div class="config-warn" id="config-warn">
-      ⚠️ Firebase not configured — responses won't be saved across devices.
-      See the HTML comments at the top of the &lt;script&gt; block to set up.
-    </div>
-
-    <form id="survey-form"></form>
-
-    <button class="btn-primary" id="submit-btn" disabled>
-      See My Chronotype →
-    </button>
-  </div>
-
-  <!-- ═══════════════════════════════ RESULTS VIEW ══════════════════════════════ -->
-  <div id="v-results" class="view" style="display:none">
-    <div class="results-header">
-      <div class="badge" id="r-badge"></div>
-      <div class="big-score" id="r-score"></div>
-      <div class="type-name" id="r-name"></div>
-      <p class="type-desc" id="r-desc"></p>
-    </div>
-
-    <p class="resp-count" id="resp-count"></p>
-
-    <div class="results-card">
-      <h3>Chronotype Distribution</h3>
-      <p class="sub">All responses to date — your score is highlighted in white</p>
-      <div class="chart-wrap"><canvas id="chart"></canvas></div>
-      <div class="legend">
-        <div class="leg-item"><div class="leg-swatch" style="background:#f97316"></div>Definitely Morning</div>
-        <div class="leg-item"><div class="leg-swatch" style="background:#fbbf24"></div>Moderately Morning</div>
-        <div class="leg-item"><div class="leg-swatch" style="background:#6366f1"></div>Intermediate</div>
-        <div class="leg-item"><div class="leg-swatch" style="background:#8b5cf6"></div>Moderately Evening</div>
-        <div class="leg-item"><div class="leg-swatch" style="background:#312e81"></div>Definitely Evening</div>
+    <!-- ═══════════════════════════════ SURVEY VIEW ═══════════════════════════════ -->
+    <div id="v-survey" class="view">
+      <div class="header">
+        <div class="icon">🌙 ☀️</div>
+        <h1>Sleep Chronotype Survey</h1>
+        <p>5 questions &nbsp;·&nbsp; ~2 minutes</p>
       </div>
+
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+
+      <div class="config-warn" id="config-warn">
+        ⚠️ Firebase not configured — responses won't be saved across devices.
+        See the HTML comments at the top of the &lt;script&gt; block to set up.
+      </div>
+
+      <form id="survey-form"></form>
+
+      <button class="btn-primary" id="submit-btn" disabled>
+        See My Chronotype →
+      </button>
     </div>
 
-    <button class="btn-outline" onclick="resetSurvey()">← Take Survey Again</button>
+    <!-- ═══════════════════════════════ RESULTS VIEW ══════════════════════════════ -->
+    <div id="v-results" class="view" style="display:none">
+      <div class="results-header">
+        <div class="badge" id="r-badge"></div>
+        <div class="big-score" id="r-score"></div>
+        <div class="type-name" id="r-name"></div>
+        <p class="type-desc" id="r-desc"></p>
+      </div>
+
+      <p class="resp-count" id="resp-count"></p>
+
+      <div class="results-card">
+        <h3>Chronotype Distribution</h3>
+        <p class="sub">All responses to date — your score is highlighted in white</p>
+        <div class="chart-wrap"><canvas id="chart"></canvas></div>
+        <div class="legend">
+          <div class="leg-item">
+            <div class="leg-swatch" style="background:#f97316"></div>Definitely Morning
+          </div>
+          <div class="leg-item">
+            <div class="leg-swatch" style="background:#fbbf24"></div>Moderately Morning
+          </div>
+          <div class="leg-item">
+            <div class="leg-swatch" style="background:#6366f1"></div>Intermediate
+          </div>
+          <div class="leg-item">
+            <div class="leg-swatch" style="background:#8b5cf6"></div>Moderately Evening
+          </div>
+          <div class="leg-item">
+            <div class="leg-swatch" style="background:#312e81"></div>Definitely Evening
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-outline" onclick="resetSurvey()">← Take Survey Again</button>
+    </div>
+
   </div>
 
-</div>
+  <script>
+    // ════════════════════════════════════════════════════════════════════════════════
+    //  FIREBASE CONFIG
+    // ════════════════════════════════════════════════════════════════════════════════
+    const firebaseConfig = {
+      apiKey: "AIzaSyC4vYDIcUtUc7tJFpX0bn1GTeOz944MLtk",
+      authDomain: "chronotype-survey.firebaseapp.com",
+      databaseURL: "https://chronotype-survey-default-rtdb.firebaseio.com",
+      projectId: "chronotype-survey",
+      storageBucket: "chronotype-survey.firebasestorage.app",
+      messagingSenderId: "1010705935617",
+      appId: "1:1010705935617:web:0bee6280dedff67f193f00"
+    };
+    // ════════════════════════════════════════════════════════════════════════════════
 
-<script>
-// ════════════════════════════════════════════════════════════════════════════════
-//  FIREBASE CONFIG
-//  ─────────────────────────────────────────────────────────────────────────────
-//  Setup steps (one-time, ~5 mins):
-//  1. Go to https://console.firebase.google.com
-//  2. Click "Add project" → give it a name → Continue through prompts
-//  3. In the left sidebar: Build → Realtime Database → Create database
-//     → choose any region → Start in TEST MODE → Enable
-//  4. Back on the Project Overview page, click the </> web icon to add a web app
-//     → register the app → copy the firebaseConfig object shown
-//  5. Paste those values into the object below (replace each "YOUR_..." string)
-//  6. Save the file and open it in a browser — done!
-//
-//  To host it online (free):
-//    Option A — Firebase Hosting:  `npm i -g firebase-tools && firebase deploy`
-//    Option B — GitHub Pages: push the file to a repo, enable Pages in Settings
-// ════════════════════════════════════════════════════════════════════════════════
-const firebaseConfig = {
-  apiKey:            "AIzaSyC4vYDIcUtUc7tJFpX0bn1GTeOz944MLtk",
-  authDomain:        "chronotype-survey.firebaseapp.com",
-  databaseURL:       "https://chronotype-survey-default-rtdb.firebaseio.com",
-  projectId:         "chronotype-survey",
-  storageBucket:     "chronotype-survey.firebasestorage.app",
-  messagingSenderId: "1010705935617",
-  appId:             "1:1010705935617:web:0bee6280dedff67f193f00"
-};
-// ════════════════════════════════════════════════════════════════════════════════
+    // ── rMEQ questions & scoring ──────────────────────────────────────────────────
+    // Reduced MEQ (Adan & Almirall, 1991). Scores range 5–22.
+    // Odd scoring on Q1/Q2 (5→1) reflects that early times = more morning-type.
+    const QUESTIONS = [
+      {
+        text: "If you were entirely free to plan your day, at what time would you choose to wake up?",
+        opts: [
+          { label: "Before 6:30 AM", val: 5 },
+          { label: "6:30 – 7:30 AM", val: 4 },
+          { label: "7:30 – 9:30 AM", val: 3 },
+          { label: "9:30 – 11:00 AM", val: 2 },
+          { label: "After 11:00 AM", val: 1 },
+        ]
+      },
+      {
+        text: "If you were entirely free to plan your evening, at what time would you choose to go to bed?",
+        opts: [
+          { label: "Before 9:00 PM", val: 5 },
+          { label: "9:00 – 10:15 PM", val: 4 },
+          { label: "10:15 PM – 12:30 AM", val: 3 },
+          { label: "12:30 – 2:00 AM", val: 2 },
+          { label: "After 2:00 AM", val: 1 },
+        ]
+      },
+      {
+        text: "If you must wake at a specific time in the morning, how much do you depend on an alarm clock?",
+        opts: [
+          { label: "Not at all", val: 4 },
+          { label: "Slightly", val: 3 },
+          { label: "Somewhat", val: 2 },
+          { label: "Very much", val: 1 },
+        ]
+      },
+      {
+        text: "How easy do you generally find it to wake up in the morning?",
+        opts: [
+          { label: "Not at all easy", val: 1 },
+          { label: "Not very easy", val: 2 },
+          { label: "Fairly easy", val: 3 },
+          { label: "Very easy", val: 4 },
+        ]
+      },
+      {
+        text: "How alert do you feel during the first half hour after waking up?",
+        opts: [
+          { label: "Not at all alert", val: 1 },
+          { label: "Slightly alert", val: 2 },
+          { label: "Fairly alert", val: 3 },
+          { label: "Very alert", val: 4 },
+        ]
+      }
+    ];
 
-// ── rMEQ questions & scoring ──────────────────────────────────────────────────
-// Reduced MEQ (Adan & Almirall, 1991). Scores range 5–22.
-// Odd scoring on Q1/Q2 (5→1) reflects that early times = more morning-type.
-const QUESTIONS = [
-  {
-    text: "If you were entirely free to plan your day, at what time would you choose to wake up?",
-    opts: [
-      { label: "Before 6:30 AM",    val: 5 },
-      { label: "6:30 – 7:30 AM",    val: 4 },
-      { label: "7:30 – 9:30 AM",    val: 3 },
-      { label: "9:30 – 11:00 AM",   val: 2 },
-      { label: "After 11:00 AM",    val: 1 },
-    ]
-  },
-  {
-    text: "If you were entirely free to plan your evening, at what time would you choose to go to bed?",
-    opts: [
-      { label: "Before 9:00 PM",          val: 5 },
-      { label: "9:00 – 10:15 PM",         val: 4 },
-      { label: "10:15 PM – 12:30 AM",     val: 3 },
-      { label: "12:30 – 2:00 AM",         val: 2 },
-      { label: "After 2:00 AM",           val: 1 },
-    ]
-  },
-  {
-    text: "If you must wake at a specific time in the morning, how much do you depend on an alarm clock?",
-    opts: [
-      { label: "Not at all",  val: 4 },
-      { label: "Slightly",    val: 3 },
-      { label: "Somewhat",    val: 2 },
-      { label: "Very much",   val: 1 },
-    ]
-  },
-  {
-    text: "How easy do you generally find it to wake up in the morning?",
-    opts: [
-      { label: "Not at all easy", val: 1 },
-      { label: "Not very easy",   val: 2 },
-      { label: "Fairly easy",     val: 3 },
-      { label: "Very easy",       val: 4 },
-    ]
-  },
-  {
-    text: "How alert do you feel during the first half hour after waking up?",
-    opts: [
-      { label: "Not at all alert", val: 1 },
-      { label: "Slightly alert",   val: 2 },
-      { label: "Fairly alert",     val: 3 },
-      { label: "Very alert",       val: 4 },
-    ]
-  }
-];
+    // Score → chronotype lookup (min inclusive, max inclusive, scores 5–22)
+    const TYPES = [
+      {
+        min: 22, max: 22, label: "Definitely Morning", color: "#f97316",
+        desc: "You're a true early bird. You naturally wake early, feel energised in the morning, and wind down well before midnight."
+      },
+      {
+        min: 18, max: 21, label: "Moderately Morning", color: "#fbbf24",
+        desc: "You lean morning. Early starts suit you well and you're at your sharpest before the afternoon rolls around."
+      },
+      {
+        min: 12, max: 17, label: "Intermediate", color: "#6366f1",
+        desc: "You're comfortably in the middle — neither strongly morning nor evening. You adapt fairly well to different schedules."
+      },
+      {
+        min: 8, max: 11, label: "Moderately Evening", color: "#8b5cf6",
+        desc: "You lean evening. You hit your stride later in the day and feel most alert in the afternoon or evening."
+      },
+      {
+        min: 5, max: 7, label: "Definitely Evening", color: "#312e81",
+        desc: "You're a true night owl. You come alive in the evening, find early mornings difficult, and prefer late nights."
+      },
+    ];
 
-// Score → chronotype lookup (min inclusive, max inclusive, scores 5–22)
-const TYPES = [
-  { min:22, max:22, label:"Definitely Morning",  color:"#f97316",
-    desc:"You're a true early bird. You naturally wake early, feel energised in the morning, and wind down well before midnight." },
-  { min:18, max:21, label:"Moderately Morning",  color:"#fbbf24",
-    desc:"You lean morning. Early starts suit you well and you're at your sharpest before the afternoon rolls around." },
-  { min:12, max:17, label:"Intermediate",         color:"#6366f1",
-    desc:"You're comfortably in the middle — neither strongly morning nor evening. You adapt fairly well to different schedules." },
-  { min: 8, max:11, label:"Moderately Evening",  color:"#8b5cf6",
-    desc:"You lean evening. You hit your stride later in the day and feel most alert in the afternoon or evening." },
-  { min: 5, max: 7, label:"Definitely Evening",  color:"#312e81",
-    desc:"You're a true night owl. You come alive in the evening, find early mornings difficult, and prefer late nights." },
-];
+    function getType(score) {
+      return TYPES.find(t => score >= t.min && score <= t.max);
+    }
 
-function getType(score) {
-  return TYPES.find(t => score >= t.min && score <= t.max);
-}
+    // ── Firebase init ─────────────────────────────────────────────────────────────
+    let db = null;
+    let fbReady = false;
 
-// ── Firebase init ─────────────────────────────────────────────────────────────
-let db = null;
-let fbReady = false;
+    try {
+      if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
+        firebase.initializeApp(firebaseConfig);
+        db = firebase.database();
+        fbReady = true;
+      }
+    } catch (e) {
+      console.warn("Firebase init failed:", e);
+    }
 
-try {
-  if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
-    firebase.initializeApp(firebaseConfig);
-    db = firebase.database();
-    fbReady = true;
-  }
-} catch (e) {
-  console.warn("Firebase init failed:", e);
-}
+    if (!fbReady) {
+      document.getElementById("config-warn").style.display = "block";
+    }
 
-if (!fbReady) {
-  document.getElementById("config-warn").style.display = "block";
-}
+    // ── Render questions ──────────────────────────────────────────────────────────
+    const form = document.getElementById("survey-form");
+    const answers = {};
 
-// ── Render questions ──────────────────────────────────────────────────────────
-const form    = document.getElementById("survey-form");
-const answers = {};
-
-QUESTIONS.forEach((q, qi) => {
-  const id   = `q${qi}`;
-  const card = document.createElement("div");
-  card.className = "q-card";
-  card.innerHTML = `
+    QUESTIONS.forEach((q, qi) => {
+      const id = `q${qi}`;
+      const card = document.createElement("div");
+      card.className = "q-card";
+      card.innerHTML = `
     <div class="q-num">Question ${qi + 1} of ${QUESTIONS.length}</div>
     <div class="q-text">${q.text}</div>
     <div class="options">
@@ -395,181 +545,182 @@ QUESTIONS.forEach((q, qi) => {
           <span class="opt-label">${o.label}</span>
         </label>`).join("")}
     </div>`;
-  form.appendChild(card);
-});
+      form.appendChild(card);
+    });
 
-document.querySelectorAll(".opt").forEach(el => {
-  el.addEventListener("click", () => {
-    const qid = el.dataset.qid;
-    document.querySelectorAll(`[data-qid="${qid}"]`).forEach(o => o.classList.remove("sel"));
-    el.classList.add("sel");
-    answers[qid] = parseInt(el.dataset.val);
-    const done = Object.keys(answers).length;
-    document.getElementById("progress-fill").style.width = (done / QUESTIONS.length * 100) + "%";
-    document.getElementById("submit-btn").disabled = done < QUESTIONS.length;
-  });
-});
+    document.querySelectorAll(".opt").forEach(el => {
+      el.addEventListener("click", () => {
+        const qid = el.dataset.qid;
+        document.querySelectorAll(`[data-qid="${qid}"]`).forEach(o => o.classList.remove("sel"));
+        el.classList.add("sel");
+        answers[qid] = parseInt(el.dataset.val);
+        const done = Object.keys(answers).length;
+        document.getElementById("progress-fill").style.width = (done / QUESTIONS.length * 100) + "%";
+        document.getElementById("submit-btn").disabled = done < QUESTIONS.length;
+      });
+    });
 
-// ── Submit ────────────────────────────────────────────────────────────────────
-let userScore = null;
-let chart     = null;
-let fbListener = null;
+    // ── Submit ────────────────────────────────────────────────────────────────────
+    let userScore = null;
+    let chart = null;
+    let fbListener = null;
 
-document.getElementById("submit-btn").addEventListener("click", async () => {
-  const score = Object.values(answers).reduce((a, b) => a + b, 0);
-  userScore = score;
+    document.getElementById("submit-btn").addEventListener("click", async () => {
+      const score = Object.values(answers).reduce((a, b) => a + b, 0);
+      userScore = score;
 
-  if (fbReady) {
-    try { await db.ref("responses").push({ score, ts: Date.now() }); }
-    catch (e) { console.warn("Save failed:", e); }
-  }
+      if (fbReady) {
+        try { await db.ref("responses").push({ score, ts: Date.now() }); }
+        catch (e) { console.warn("Save failed:", e); }
+      }
 
-  showResults(score);
-});
+      showResults(score);
+    });
 
-// ── Results ───────────────────────────────────────────────────────────────────
-function showResults(score) {
-  const type = getType(score);
+    // ── Results ───────────────────────────────────────────────────────────────────
+    function showResults(score) {
+      const type = getType(score);
 
-  // Populate header
-  const badge = document.getElementById("r-badge");
-  badge.textContent    = type.label;
-  badge.style.background = type.color + "28";
-  badge.style.color      = type.color;
+      // Populate header
+      const badge = document.getElementById("r-badge");
+      badge.textContent = type.label;
+      badge.style.background = type.color + "28";
+      badge.style.color = type.color;
 
-  document.getElementById("r-score").textContent = score;
-  document.getElementById("r-score").style.color = type.color;
-  document.getElementById("r-name").textContent  = type.label;
-  document.getElementById("r-desc").textContent  = type.desc;
+      document.getElementById("r-score").textContent = score;
+      document.getElementById("r-score").style.color = type.color;
+      document.getElementById("r-name").textContent = type.label;
+      document.getElementById("r-desc").textContent = type.desc;
 
-  // Show results view
-  document.getElementById("v-survey").style.display  = "none";
-  const rv = document.getElementById("v-results");
-  rv.style.display = "block";
-  rv.classList.remove("view"); void rv.offsetWidth; rv.classList.add("view");
+      // Show results view
+      document.getElementById("v-survey").style.display = "none";
+      const rv = document.getElementById("v-results");
+      rv.style.display = "block";
+      rv.classList.remove("view"); void rv.offsetWidth; rv.classList.add("view");
 
-  // Build chart
-  buildChart();
-}
+      // Build chart
+      buildChart();
+    }
 
-// Score range: 5–22 (18 integer values)
-const SCORE_LABELS = Array.from({ length: 18 }, (_, i) => i + 5);
+    // Score range: 5–22 (18 integer values)
+    const SCORE_LABELS = Array.from({ length: 18 }, (_, i) => i + 5);
 
-function barColors(highlight) {
-  return SCORE_LABELS.map(s => {
-    if (s === highlight) return "#ffffff";
-    return getType(s).color + "bb";
-  });
-}
+    function barColors(highlight) {
+      return SCORE_LABELS.map(s => {
+        if (s === highlight) return "#ffffff";
+        return getType(s).color + "bb";
+      });
+    }
 
-function buildChart() {
-  const ctx = document.getElementById("chart").getContext("2d");
-  if (chart) { chart.destroy(); chart = null; }
+    function buildChart() {
+      const ctx = document.getElementById("chart").getContext("2d");
+      if (chart) { chart.destroy(); chart = null; }
 
-  chart = new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: SCORE_LABELS,
-      datasets: [{
-        data: new Array(18).fill(0),
-        backgroundColor: barColors(userScore),
-        borderColor:     barColors(userScore).map((c, i) =>
-          SCORE_LABELS[i] === userScore ? "#ffffff" : getType(SCORE_LABELS[i]).color),
-        borderWidth: SCORE_LABELS.map(s => s === userScore ? 2 : 1),
-        borderRadius: 4,
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            title: ctx  => `Score: ${ctx[0].label}`,
-            label: ctx  => {
-              const s   = parseInt(ctx.label);
-              const n   = ctx.parsed.y;
-              const you = s === userScore ? "  ← You" : "";
-              return `${n} response${n !== 1 ? "s" : ""}  ·  ${getType(s).label}${you}`;
+      chart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: SCORE_LABELS,
+          datasets: [{
+            data: new Array(18).fill(0),
+            backgroundColor: barColors(userScore),
+            borderColor: barColors(userScore).map((c, i) =>
+              SCORE_LABELS[i] === userScore ? "#ffffff" : getType(SCORE_LABELS[i]).color),
+            borderWidth: SCORE_LABELS.map(s => s === userScore ? 2 : 1),
+            borderRadius: 4,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                title: ctx => `Score: ${ctx[0].label}`,
+                label: ctx => {
+                  const s = parseInt(ctx.label);
+                  const n = ctx.parsed.y;
+                  const you = s === userScore ? "  ← You" : "";
+                  return `${n} response${n !== 1 ? "s" : ""}  ·  ${getType(s).label}${you}`;
+                }
+              },
+              backgroundColor: "#1e293b",
+              borderColor: "#334155", borderWidth: 1,
+              titleColor: "#f1f5f9", bodyColor: "#94a3b8",
+              padding: 10,
             }
           },
-          backgroundColor: "#1e293b",
-          borderColor: "#334155", borderWidth: 1,
-          titleColor: "#f1f5f9", bodyColor: "#94a3b8",
-          padding: 10,
-        }
-      },
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: "rMEQ Score    (5 = Evening type  ←————→  22 = Morning type)",
-            color: "#475569", font: { size: 10.5 }
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: "rMEQ Score    (5 = Evening type  ←————→  22 = Morning type)",
+                color: "#475569", font: { size: 10.5 }
+              },
+              ticks: { color: "#64748b", font: { size: 11 } },
+              grid: { color: "#1e293b" },
+            },
+            y: {
+              beginAtZero: true,
+              ticks: { color: "#64748b", stepSize: 1, precision: 0, font: { size: 11 } },
+              grid: { color: "#334155" },
+              title: { display: true, text: "Responses", color: "#475569", font: { size: 10.5 } }
+            }
           },
-          ticks: { color: "#64748b", font: { size: 11 } },
-          grid:  { color: "#1e293b" },
-        },
-        y: {
-          beginAtZero: true,
-          ticks: { color: "#64748b", stepSize: 1, precision: 0, font: { size: 11 } },
-          grid:  { color: "#334155" },
-          title: { display: true, text: "Responses", color: "#475569", font: { size: 10.5 } }
+          animation: { duration: 400 }
         }
-      },
-      animation: { duration: 400 }
-    }
-  });
-
-  // Live data from Firebase (or fallback to single score)
-  if (fbReady) {
-    fbListener = db.ref("responses").on("value", snap => {
-      const data   = snap.val() || {};
-      const counts = new Array(18).fill(0);
-      let   total  = 0;
-
-      Object.values(data).forEach(r => {
-        const idx = r.score - 5;
-        if (idx >= 0 && idx < 18) { counts[idx]++; total++; }
       });
 
-      chart.data.datasets[0].data = counts;
-      chart.update("none");
-      document.getElementById("resp-count").innerHTML =
-        `<strong>${total}</strong> total response${total !== 1 ? "s" : ""} so far`;
-    });
-  } else {
-    const counts = new Array(18).fill(0);
-    counts[userScore - 5] = 1;
-    chart.data.datasets[0].data = counts;
-    chart.update();
-    document.getElementById("resp-count").innerHTML =
-      `<strong>1</strong> response shown &nbsp;(Firebase not set up — only your score visible)`;
-  }
-}
+      // Live data from Firebase (or fallback to single score)
+      if (fbReady) {
+        fbListener = db.ref("responses").on("value", snap => {
+          const data = snap.val() || {};
+          const counts = new Array(18).fill(0);
+          let total = 0;
 
-// ── Reset ─────────────────────────────────────────────────────────────────────
-function resetSurvey() {
-  if (fbReady && fbListener) {
-    db.ref("responses").off("value", fbListener);
-    fbListener = null;
-  }
-  if (chart) { chart.destroy(); chart = null; }
+          Object.values(data).forEach(r => {
+            const idx = r.score - 5;
+            if (idx >= 0 && idx < 18) { counts[idx]++; total++; }
+          });
 
-  Object.keys(answers).forEach(k => delete answers[k]);
-  document.querySelectorAll(".opt").forEach(el => el.classList.remove("sel"));
-  document.querySelectorAll("input[type=radio]").forEach(el => el.checked = false);
-  userScore = null;
+          chart.data.datasets[0].data = counts;
+          chart.update("none");
+          document.getElementById("resp-count").innerHTML =
+            `<strong>${total}</strong> total response${total !== 1 ? "s" : ""} so far`;
+        });
+      } else {
+        const counts = new Array(18).fill(0);
+        counts[userScore - 5] = 1;
+        chart.data.datasets[0].data = counts;
+        chart.update();
+        document.getElementById("resp-count").innerHTML =
+          `<strong>1</strong> response shown &nbsp;(Firebase not set up — only your score visible)`;
+      }
+    }
 
-  document.getElementById("progress-fill").style.width = "0%";
-  document.getElementById("submit-btn").disabled = true;
+    // ── Reset ─────────────────────────────────────────────────────────────────────
+    function resetSurvey() {
+      if (fbReady && fbListener) {
+        db.ref("responses").off("value", fbListener);
+        fbListener = null;
+      }
+      if (chart) { chart.destroy(); chart = null; }
 
-  document.getElementById("v-results").style.display = "none";
-  const sv = document.getElementById("v-survey");
-  sv.style.display = "block";
-  sv.classList.remove("view"); void sv.offsetWidth; sv.classList.add("view");
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-</script>
+      Object.keys(answers).forEach(k => delete answers[k]);
+      document.querySelectorAll(".opt").forEach(el => el.classList.remove("sel"));
+      document.querySelectorAll("input[type=radio]").forEach(el => el.checked = false);
+      userScore = null;
+
+      document.getElementById("progress-fill").style.width = "0%";
+      document.getElementById("submit-btn").disabled = true;
+
+      document.getElementById("v-results").style.display = "none";
+      const sv = document.getElementById("v-survey");
+      sv.style.display = "block";
+      sv.classList.remove("view"); void sv.offsetWidth; sv.classList.add("view");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
 </body>
+
 </html>
